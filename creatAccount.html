@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/creatAccount.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row no-gutter">
+      <div class="col-md-6 d-none d-md-flex bg-image"></div>
+      <div class="col-md-6 bg-light">
+        <div class="login d-flex align-items-center py-5">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-7 col-xl-6 mx-auto">
+                <h3 class="display-4 text-right">إنشاء حساب جديد</h3>
+                <div class="text-center">
+                  <img src="Media/NIC.png" alt="صورة توضيحية" class="my-4 mx-auto d-block" width="420" height="100" style="border-radius: 2%;">
+                </div>
+                <div class="form-separator">
+                  <div class="text-center">
+                    <span>أو</span>
+                  </div>
+                </div>
+                <form action="/create-account" method="POST">
+                  <div id="popupNotification" style="display: none; color: #d81a1a;"></div>
+                  <div class="form-group mb-3">
+                    <input type="text" placeholder="الاسم" name="name"  autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4 text-right input-height">
+                    <span class="text-danger" id="nameError"></span>
+                  </div>
+                  <div class="form-group mb-3">
+                    <input type="text" placeholder="رقم الهوية / الإقامة" name="idNumber"  class="form-control rounded-pill border-0 shadow-sm px-4  text-right input-height">
+                    <span class="text-danger" id="idError"></span>
+                  </div>
+                  <div class="form-group mb-3">
+                    <input type="tel" placeholder="رقم الهاتف" name="phoneNumber"  autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4 text-right input-height">
+                    <span class="text-danger" id="phoneNumberError"></span>
+                  </div>
+                  <div class="form-group mb-3">
+                    <input type="email" placeholder="البريد الإلكتروني" name="email"  autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4 text-right input-height">
+                    <span class="text-danger" id="emailError"></span>
+                  </div>
+                  <div class="form-group mb-3">
+                    <input type="password" placeholder="كلمة المرور" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4 text-right input-height">
+                    
+                  </div>
+                  <div id="message">
+                    <h6>Password must contain the following:</h6>
+                    <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                    <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                    <p id="number" class="invalid">A <b>number</b></p>
+                    <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                  </div>
+                  <button type="submit" class="btn btn-custom btn-block text-uppercase mb-2 rounded-pill shadow-sm">تسجيل </button>
+                  <div class="form-footer">
+                    <p class="text-right">لديك حساب بالفعل؟ <a href="login.html" class="font-italic text-muted">العودة إلى تسجيل الدخول</a></p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript to display validation errors
+    const form = document.querySelector('form');
+    const nameInput = document.querySelector('input[name="name"]');
+    const idInput = document.querySelector('input[name="idNumber"]');
+    const phoneNumberInput = document.querySelector('input[name="phoneNumber"]');
+    const emailInput = document.querySelector('input[name="email"]');
+    const passwordInput = document.querySelector('input[name="password"]');
+    const nameError = document.getElementById('nameError');
+    const idError = document.getElementById('idError');
+    const phoneNumberError = document.getElementById('phoneNumberError');
+    const emailError = document.getElementById('emailError');
+    const passwordError = document.getElementById('passwordError');
+
+    document.querySelector('form').addEventListener('submit', function(event) {
+
+      if (!nameInput.value) {
+        nameInput.classList.add('is-invalid');
+        nameError.innerText = "الاسم مطلوب";
+        nameError.style.float = "right";
+        nameError.style.paddingBottom = "6px";
+        event.preventDefault();
+      } else {
+        nameInput.classList.remove('is-invalid');
+        nameError.innerText = "";
+      }
+
+      if (!idInput.value || isNaN(idInput.value)) {
+          idInput.classList.add('is-invalid');
+          idError.innerText = "رقم الهوية / الإقامة مطلوب ويجب أن يكون رقماً.";
+          idError.style.float = "right";
+          idError.style.paddingBottom = "10px";
+          event.preventDefault();
+      }else if (idInput.value.length !== 10) {
+          idInput.classList.add('is-invalid');
+          idError.innerText = "رقم الهوية / الإقامة يجب أن يتكون من 10 أرقام.";
+          idError.style.float = "right";
+          idError.style.paddingBottom = "10px";
+          event.preventDefault();
+      } else {
+            idInput.classList.remove('is-invalid');
+            idError.innerText = ""
+      }
+
+      if (!phoneNumberInput.value) {
+        phoneNumberInput.classList.add('is-invalid');
+        phoneNumberError.innerText = "رقم الهاتف مطلوب";
+        phoneNumberError.style.float = "right";
+        phoneNumberError.style.paddingBottom = "8px";
+        event.preventDefault();
+      } else if (phoneNumberInput.value.length !== 10) {
+          phoneNumberInput.classList.add('is-invalid');
+          phoneNumberError.innerText = "رقم الهاتف يجب أن يتكون من 10 أرقام.";
+          phoneNumberError.style.float = "right";
+          phoneNumberError.style.paddingBottom = "10px";
+          event.preventDefault();
+      } else {
+          phoneNumberInput.classList.remove('is-invalid');
+          phoneNumberError.innerText = "";
+      }
+
+      if (!emailInput.value) {
+        emailInput.classList.add('is-invalid');
+        emailError.innerText = "الايميل مطلوب";
+        emailError.style.float = "right";
+        emailError.style.paddingBottom = "8px";
+        event.preventDefault();
+      } else {
+        emailInput.classList.remove('is-invalid');
+        emailError.innerText = "";
+      }
+
+
+
+    var myInput = document.getElementById("password");
+    var letter = document.getElementById("letter");
+    var capital = document.getElementById("capital");
+    var number = document.getElementById("number");
+    var length = document.getElementById("length");
+
+    // When the user clicks on the password field, show the message box
+    myInput.onfocus = function() {
+      document.getElementById("message").style.display = "block";
+    }
+
+    // When the user clicks outside of the password field, hide the message box
+    myInput.onblur = function() {
+      document.getElementById("message").style.display = "none";
+    }
+
+    // When the user starts to type something inside the password field
+    myInput.onkeyup = function() {
+      // Validate lowercase letters
+      var lowerCaseLetters = /[a-z]/g;
+      if (myInput.value.match(lowerCaseLetters)) {
+        letter.classList.remove("invalid");
+        letter.classList.add("valid");
+      } else {
+        letter.classList.remove("valid");
+        letter.classList.add("invalid");
+      }
+
+      // Validate capital letters
+      var upperCaseLetters = /[A-Z]/g;
+      if (myInput.value.match(upperCaseLetters)) {
+        capital.classList.remove("invalid");
+        capital.classList.add("valid");
+      } else {
+        capital.classList.remove("valid");
+        capital.classList.add("invalid");
+      }
+
+      // Validate numbers
+      var numbers = /[0-9]/g;
+      if (myInput.value.match(numbers)) {
+        number.classList.remove("invalid");
+        number.classList.add("valid");
+      } else {
+        number.classList.remove("valid");
+        number.classList.add("invalid");
+      }
+
+      // Validate length
+      if (myInput.value.length >= 8) {
+        length.classList.remove("invalid");
+        length.classList.add("valid");
+      } else {
+        length.classList.remove("valid");
+        length.classList.add("invalid");
+      }
+    }
+    });
+
+  </script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    // Function to display pop-up notification
+    function showNotification(message) {
+      $('#popupNotification').text(message);
+      $('#popupNotification').fadeIn().delay(3000).fadeOut(); // Fade in, delay, and then fade out
+    }
+
+    // Handle AJAX responses
+    $('form').submit(function(event) {
+      event.preventDefault(); // Prevent form submission
+      $.ajax({
+        type: $(this).attr('method'),
+        url: $(this).attr('action'),
+        data: $(this).serialize(),
+        success: function(response) {
+          if (response.message) {
+            showNotification(response.message); // Display message as pop-up notification
+          } else {
+            window.location.href = '/LandingPage.html'; // Redirect to landing page on successful login
+          }
+        },
+        error: function(xhr, status, error) {
+          var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : 'Internal Server Error';
+          showNotification(errorMessage); // Display error message as pop-up notification
+        }
+      });
+    });
+  });
+</script>
+</body>
+
+</html>

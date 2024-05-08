@@ -115,7 +115,7 @@ app.post('/create-account', validateForm, async (req, res) => {
     // Check if the user already exists in the database
     const existingUser = await User.findOne({ idNumber: trimmedIdNumber });
     if (existingUser) {
-      res.status(404).send('المستخدم مسجل مسبقًا');
+      res.json({ message: 'المستخدم مسجل مسبقا' });
       return;
     }
 
@@ -137,25 +137,27 @@ app.post('/submit-form', upload.fields([{ name: 'leaseContract', maxCount: 1 }, 
 
       const leaseContract = req.files.leaseContract[0].filename;
       const storeFacade = req.files.storeFacade[0].filename;
-      let otherAttachments = req.files.otherAttachments;
-      otherAttachments = req.files.otherAttachments.map(image => { return image.filename })
+
+      // Check if otherAttachments is present and not empty
+      let otherAttachments = req.files.otherAttachments?.map(image => image.filename) || [];
 
       const newForm = new Form(formData);
-      newForm['attachments'] = {
-        'leaseContract': leaseContract,
-        'storeFacade': storeFacade,
-        'otherAttachments': otherAttachments
-      }
+      newForm.attachments = {
+        leaseContract: leaseContract,
+        storeFacade: storeFacade,
+        otherAttachments: otherAttachments
+      };
 
       await newForm.save();
-      // res.status(201).json({ message: 'Form submitted successfully' });
-      res.sendFile(path.join(__dirname, 'frontend', 'success.html'));
+      // Redirect the user to Application.html with step=6 query parameter
+      res.redirect('/LandingPage.html');
 
     } catch (err) {
-      console.error(err);
+      console.error(' Error submitting form', err);
       res.status(500).json({ message: 'Error submitting form' });
     }
   });
+
 
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'login.html'));
@@ -169,7 +171,7 @@ app.post('/login', async (req, res) => {
     const user = await User.findOne({ idNumber: trimmedIdNumber });
 
     if (!user) {
-      res.status(404).send('المستخدم غير مسجل');
+      res.json({ message: 'المستخدم غير مسجل' });
       return;
     }
 

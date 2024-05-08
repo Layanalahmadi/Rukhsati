@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row no-gutter">
+      <div class="col-md-6 d-none d-md-flex bg-image"></div>
+      <div class="col-md-6 bg-light">
+        <div class="login d-flex align-items-center py-5">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-7 col-xl-6 mx-auto">
+                <h3 class="display-4 text-right">تسجيل الدخول</h3>
+                <br>
+                <div class="text-center">
+                  <img src="Media/NIC.png" alt="صورة توضيحية" class="my-4 mx-auto d-block" width="420" height="100" style="border-radius: 2%;">
+                </div>
+                <div class="form-separator">
+                  <div class="text-center">
+                    <span>أو</span>
+                  </div>
+                </div>
+                
+                <form action="/login" method="POST">
+                  <div id="popupNotification" style="display: none; color: red;"></div>
+                  <div class="form-group mb-3">
+                    <input type="text" name="idNumber" placeholder="رقم الهوية / الإقامة"  autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4 text-right input-height">
+                    <span class="text-danger" id="idError"></span>
+                  </div>
+                  <div class="form-group mb-3">
+                    <input type="password" name="password" placeholder="كلمة المرور" class="form-control rounded-pill border-0 shadow-sm px-4 text-right">
+                    <span class="text-danger" id="passwordError"></span>
+                  </div>
+                  <button type="submit" class="btn btn-custom btn-block text-uppercase mb-2 rounded-pill shadow-sm">تسجيل الدخول</button>
+                  <div class="form-footer">
+                    <p class="text-right">ليس لديك حساب؟ <a href="creatAccount.html" class="font-italic text-muted">انشئ حساب جديد</a></p>
+                  </div>
+                </form>
+                <script>
+                  // JavaScript to display validation errors
+                  const idInput = document.querySelector('input[name="idNumber"]');
+                  const passwordInput = document.querySelector('input[name="password"]');
+                  const idError = document.getElementById('idError');
+                  const passwordError = document.getElementById('passwordError');
+                
+                 // Check for errors when form submits
+                document.querySelector('form').addEventListener('submit', function(event) {
+                  if (!idInput.value || isNaN(idInput.value)) {
+                    idInput.classList.add('is-invalid');
+                    idError.innerText = "رقم الهوية / الإقامة مطلوب ويجب أن يكون رقماً.";
+                    idError.style.float = "right";
+                    event.preventDefault();
+                  } else if (idInput.value.length !== 10) {
+                    idInput.classList.add('is-invalid');
+                    idError.innerText = "رقم الهوية / الإقامة يجب أن يتكون من 10 أرقام.";
+                    idError.style.float = "right";
+                    event.preventDefault();
+                  } else {
+                    idInput.classList.remove('is-invalid');
+                    idError.innerText = "";
+                  }
+
+                  if (!passwordInput.value) {
+                    passwordInput.classList.add('is-invalid');
+                    passwordError.innerText = "كلمة المرور مطلوبة.";
+                    passwordError.style.float = "right";
+                    event.preventDefault();
+                  } else {
+                    passwordInput.classList.remove('is-invalid');
+                    passwordError.innerText = "";
+                  }
+                });
+                  
+                </script>
+                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                 <script>
+                   $(document).ready(function () {
+                     // Function to display pop-up notification
+                     function showNotification(message) {
+                       $('#popupNotification').text(message);
+                       $('#popupNotification').fadeIn().delay(3000).fadeOut(); // Fade in, delay, and then fade out
+                     }
+ 
+                     // Handle AJAX responses
+                     $('form').submit(function (event) {
+                       event.preventDefault(); // Prevent form submission
+                       $.ajax({
+                         type: $(this).attr('method'),
+                         url: $(this).attr('action'),
+                         data: $(this).serialize(),
+                         success: function (response) {
+                           if (response.message) {
+                             showNotification(response.message); // Display message as pop-up notification
+                           } else {
+                             window.location.href = '/LandingPage.html'; // Redirect to landing page on successful login
+                           }
+                         },
+                         error: function (xhr, status, error) {
+                           var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : 'Internal Server Error';
+                           showNotification(errorMessage); // Display error message as pop-up notification
+                         }
+                       });
+                     });
+                   });
+                 </script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

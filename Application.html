@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body dir="rtl">
+  <div class="main">
+    <div class="sidebar">
+      <img src="Media/sss.png" alt="side-bar" class="side-bar">
+      <div class="step">
+        <div class="step-1 ">
+          <h2 class="number step-indicator active">١</h2>
+          <div class="flex-steps">
+            <p>خطوة ١</p>
+            <h3>بيانات مقدم الطلب</h3>
+          </div>
+        </div>
+        <div class="step-2">
+          <h2 class="number step-indicator">٢</h2>
+          <div class="flex-steps">
+            <p>خطوة ٢</p>
+            <h3>بيانات النشاط</h3>
+          </div>
+        </div>
+        <div class="step-3">
+          <h2 class="number step-indicator">٣</h2>
+          <div class="flex-steps">
+            <p>خطوة ٣</p>
+            <h3>بيانات الموقع</h3>
+          </div>
+        </div>
+        <div class="step-4">
+          <h2 class="number step-indicator">٤</h2>
+          <div class="flex-steps">
+            <p>خطوة ٥</p>
+            <h3>بيانات المحل</h3>
+          </div>
+        </div>
+        <div class="step-5">
+          <h2 class="number step-indicator">٥</h2>
+          <div class="flex-steps">
+            <p>خطوة ٥</p>
+            <h3>المرفقات</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-form">
+      <form id="form" action="/submit-form" method="POST" enctype="multipart/form-data">
+        <div class="form-step" index="1">
+          <h1 class="title">بيانات مقدم الطلب </h1>
+          <div class="input-text">
+            <div class="input-div">
+              <label class="attachment-label">اسم مقدم الطلب<span>*</span></label>
+              <input id="name" type="text" name="personalInformation.name" required>
+              <div id="nameInputError" class="error-message"></div>
+            </div>
+            <div class="input-div">
+              <label class="attachment-label">رقم الجوال<span>*</span></label>
+              <input id="phone" type="text" name="personalInformation.phone" required>
+              <div id="phoneInputError" class="error-message"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="position" class="attachment-label">صفة مقدم الطلب<span>*</span></label><br><br>
+            <div class="radio-container">
+              <input type="radio" id="position1" name="personalInformation.position" value="مالك / مدير منشأة" required>
+              <label for="position1" class="radio-label">مالك / مدير منشأة</label>
+            </div>
+            <div class="radio-container">
+              <input type="radio" id="position2" name="personalInformation.position" value="مفوض / مدير حساب منشأة" required>
+              <label for="position2" class="radio-label">مفوض / مدير حساب منشأة</label>
+            </div>
+          </div>
+          <div id="position-error" class="error-message"></div>
+
+          <div class="input-text">
+            <div class="input-div">
+              <label class="attachment-label">السجل التجاري<span>*</span></label>
+              <input id="trade-licence" type="text" name="personalInformation.tradeLicence" required>
+              <div id="commRegisterInputError" class="error-message"></div>
+            </div>
+            <div class="input-div">
+              <label class="attachment-label">اسم المنشأة<span>*</span></label>
+              <input id="company-name" type="text" name="personalInformation.companyName" required>
+              <div id="facilityNameInputError" class="error-message"></div>
+            </div>
+          </div>
+          <div class="input-text">
+            <div class="input-div">
+              <label class="attachment-label">رقم المنشأة<span>*</span></label>
+              <input id="company-number" type="text" name="personalInformation.companyNumber" required>
+              <div id="facilityNumberInputError" class="error-message"></div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-step" index="2">
+          <h1 class="title">بيانات النشاط </h1>
+          <div class="input-text">
+            <div class="input-div">
+              <label class="attachment-label">نوع النشاط <span>*</span></label>
+              <input id="activity-name" type="text" name="activityData.activityName" required>
+              <div id="activityInputError" class="error-message"></div>
+            </div>
+            <div class="input-div">
+              <label class="attachment-label">المساحه الكلية للنشاط<span>*</span></label>
+              <input id="total-area" type="text" name="activityData.totalArea" required>
+              <div id="totalAreaInputError" class="error-message"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="position" class="attachment-label">نوع العاملين<span>*</span></label><br><br>
+            <div class="radio-container">
+              <input type="radio" id="position3" name="activityData.workerType" value="نساء" required>
+              <label for="position3" class="radio-label">نساء</label>
+            </div>
+            <div class="radio-container">
+              <input type="radio" id="position4" name="activityData.workerType" value="رجال" required>
+              <label for="position4" class="radio-label">رجال</label>
+            </div>
+            <div class="radio-container">
+              <input type="radio" id="position5" name="activityData.workerType" value="نساء / رجال" required>
+              <label for="position5" class="radio-label">نساء / رجال</label>
+            </div>
+          </div>
+          <div id="position--error" class="error-message"></div>
+
+        </div>
+
+        <div class="form-step" index="3">
+          <h1 class="title">بيانات الموقع الجغرافي</h1>
+          <div class="image-container">
+            <img src="Media/map.png" alt="Map" class="map-image">
+          </div>
+          <div class="input-text">
+            <div class="input-div">
+              <label class="attachment-label">المنطقة<span>*</span></label>
+              <input id="Region" type="text" name="geographicLocation.region" required>
+              <div id="regionError" class="error-message"></div>
+            </div>
+            <div class="input-div">
+              <label class="attachment-label">الأمانة<span>*</span></label>
+              <input id="Alamana" type="text" name="geographicLocation.amanah" required>
+              <div id="alamanaError" class="error-message"></div>
+            </div>
+          </div>
+          <div class="input-text">
+            <div class="input-div">
+              <label class="attachment-label">البلدية<span>*</span></label>
+              <input id="Municipality" type="text" name="geographicLocation.municipality" required>
+              <div id="municipalityError" class="error-message"></div>
+            </div>
+            <div class="input-div">
+              <label class="attachment-label">الحي<span>*</span></label>
+              <input id="District" type="text" name="geographicLocation.neighborhood" required>
+              <div id="districtError" class="error-message"></div>
+            </div>
+          </div>
+          <div class="input-text">
+            <div class="input-div">
+              <label class="attachment-label">الشارع<span>*</span></label>
+              <input id="Street" type="text" name="geographicLocation.street" required>
+              <div id="streetError" class="error-message"></div>
+            </div>
+            <div class="input-div">
+              <label class="attachment-label">رقم المخطط<span>*</span></label>
+              <input id="planNumber" type="text" name="geographicLocation.plotNumber" required>
+              <div id="planNumberError" class="error-message"></div>
+            </div>
+            <div class="input-div">
+              <label class="attachment-label">رقم قطعة الارض<span>*</span></label>
+              <input id="PlotNumber" type="text" name="geographicLocation.landPieceNumber" required>
+              <div id="plotNumberError" class="error-message"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-step" index="4">
+          <h1 class="title">بيانات المحل</h1>
+          <div class="input-text">
+            <div class="input-div">
+              <label class="attachment-label">هل لديك علامة تجارية ؟<span>*</span></label>
+              <select id="brand" name="storeData.hasBrand" required>
+                <option>اختر</option>
+                <option>نعم</option>
+                <option>لا</option>
+              </select>
+              <div id="brandError" class="error-message"></div>
+            </div>
+          </div>
+          <div class="input-text">
+            <div class="input-div">
+              <label class="attachment-label">اسم المحل<span>*</span></label>
+              <input id="storeName" type="text" name="storeData.storeName" required>
+              <div id="storeNameError" class="error-message"></div>
+            </div>
+            <div class="input-div">
+              <label class="attachment-label">رقم المحل<span>*</span></label>
+              <input id="storeNumber" type="text" name="storeData.storeNumber" required>
+              <div id="storeNumberError" class="error-message"></div>
+            </div>
+          </div>
+          <div class="input-text">
+            <div class="input-div">
+              <label class="attachment-label">عدد الأدوار في المحل<span>*</span></label>
+              <input id="floors" type="text" name="storeData.numberOfFloors" required>
+              <div id="floorsError" class="error-message"></div>
+            </div>
+            <div class="input-div">
+              <label class="attachment-label">عدد الكاميرات في المحل<span>*</span></label>
+              <input id="cameras" type="text" name="storeData.numberOfCameras" required>
+              <div id="camerasError" class="error-message"></div>
+            </div>
+            <div class="input-div">
+              <label class="attachment-label">هل يوجد مصعد في المحل ؟<span>*</span></label>
+              <select id="elevator" name="storeData.hasElevator" required>
+                <option>اختر</option>
+                <option>نعم</option>
+                <option>لا</option>
+              </select>
+              <div id="elevatorError" class="error-message"></div>
+            </div>
+            <div class="input-div">
+              <label class="attachment-label">هل لديك تصريح السلامة ؟<span>*</span></label>
+              <select id="safetyPermit" name="storeData.hasSafetyPermit" required>
+                <option>اختر</option>
+                <option>نعم</option>
+                <option>لا</option>
+              </select>
+              <div id="safetyPermitError" class="error-message"></div>
+            </div>
+          </div>
+          <div class="input-text">
+            <div class="input-div">
+              <label class="attachment-label">نوع مقدم الطلب <span>*</span></label>
+              <select id="applicantType" name="storeData.applicantType" required>
+                <option>اختر</option>
+                <option>مالك</option>
+                <option>مستأجر</option>
+              </select>
+              <div id="applicantTypeError" class="error-message"></div>
+            </div>
+            <div class="input-div">
+              <label class="attachment-label">نوع العقد <span>*</span></label>
+              <select id="contractType" name="storeData.contractType" required>
+                <option>اختر</option>
+                <option>عقد إيجار</option>
+                <option>عقد استثمار</option>
+              </select>
+              <div id="contractTypeError" class="error-message"></div>
+            </div>
+          </div>
+          <div class="input-text">
+            <div class="input-div">
+              <label class="attachment-label">نوع اللوحة<span>*</span></label>
+              <input id="boardType" type="text" name="storeData.panelType" required>
+              <div id="boardTypeError" class="error-message"></div>
+            </div>
+            <div class="input-div">
+              <label class="attachment-label">مساحة اللوحة بالمتر المربع<span>*</span></label>
+              <input id="boardSize" type="text" name="storeData.panelArea" required>
+              <div id="boardSizeError" class="error-message"></div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-step" index="5">
+          <h1 class="title">المرفقات</h1>
+          <p class="step-description">قم بتحميل المرفقات المطلوبة لمعالجة الطلب. يمكن أن تكون المرفقات بتنسيق PDF،
+            PNG، أو JPG.</p>
+          <div class="attachment-upload">
+            <label for="pdf-upload" class="attachment-label"> تحميل الصحك او عقد ايجار <span>*</span></label>
+            <input type="file" id="pdf-upload" name="leaseContract" class="attachment-input" accept=".pdf,image/png,image/jpeg" required>
+
+            <label for="png-upload" class="attachment-label">تحميل واجهة المحل <span>*</span></label>
+            <input type="file" id="png-upload" name="storeFacade" class="attachment-input" accept=".pdf,image/png,image/jpeg" required>
+
+            <label for="jpg-upload" class="attachment-label">اي مرفقات اخرى </label>
+            <input type="file" id="jpg-upload" name="otherAttachments" class="attachment-input" accept=".pdf,image/png,image/jpeg" multiple>
+          </div>
+          <button class="submit-button">ارسال</button>
+      </form>
+
+    </div>
+
+    <div class="form-step" index="6">
+      <div class="thank">
+        <i class="fas fa-check-circle thank-icon"></i>
+        <h1 class="thanksu">شكرًا لك!</h1>
+        <p>
+          شكرًا تقديم طلبك ! ا.
+          إذا كنت بحاجة إلى دعم، فلا تتردد في مراسلتنا عبر
+          البريد الإلكتروني على support@Rukhsati.com
+        </p>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button class="go-back-button">الرجوع</button>
+      <button class="next-step">التالي</button>
+      <button class="done-button">اتمام</button>
+    </div>
+
+  </div>
+  </div>
+  <script src="JS/script.js"></script>
+</body>
