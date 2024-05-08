@@ -178,7 +178,6 @@ function isStepValid(stepIndex) {
   return isValid;
 }
 
-
 //validaton STEP 1
 // Get all input elements
 const nameInput = document.getElementById('name');
@@ -215,20 +214,27 @@ next1.addEventListener('click', function(event) {
 function validateFormstep1() {
     let isValid = true;
 
-    // Validation for name
-    if (!nameInput.value) {
+// Validation for name
+if (!nameInput.value) {
+  nameInput.classList.add('is-invalid');
+  nameInputError.innerText = "هذا الحقل مطلوب";
+  isValid = false;
+} else if (!/^[أ-ي\s]+$/.test(nameInput.value)) { 
+  nameInput.classList.add('is-invalid');
+  nameInputError.innerText = "يجب ان يحتوي على احرف عربية فقط";
+  isValid = false;
+} else {
+  // Check if the input contains at least three words
+  const words = nameInput.value.split(/\s+/).filter(word => word.trim() !== '');
+  if (words.length < 3) {
       nameInput.classList.add('is-invalid');
-      nameInputError.innerText = "هذا الحقل مطلوب";
-        isValid = false;
-      } else if (!/^[؀-ۿ]+$/.test(nameInput.value)) { 
-        nameInput.classList.add('is-invalid');
-        nameInputError.innerText = "يجب ان يحتوي على احرف عربية فقط";
-        isValid = false;
-    } else {
-        nameInput.classList.remove('is-invalid');
-        nameInputError.innerText = "";
-    }
-
+      nameInputError.innerText = "يجب ان يكون الاسم ثلاثي";
+      isValid = false;
+  } else {
+      nameInput.classList.remove('is-invalid');
+      nameInputError.innerText = "";
+  }
+}
     // Validation for phone number
 if (!phoneInput.value) {
   phoneInput.classList.add('is-invalid');
@@ -272,7 +278,7 @@ if (!positionInput1.checked && !positionInput2.checked) {
       facilityNameInput.classList.add('is-invalid');
       facilityNameInputError.innerText = "هذا الحقل مطلوب";
         isValid = false;
-    } else if (!/^[؀-ۿ]+$/.test(facilityNameInput.value)) { 
+    } else if (!/^[أ-ي]+$/.test(facilityNameInput.value)) { 
       facilityNameInput.classList.add('is-invalid');
       facilityNameInputError.innerText = "يجب ان يحتوي على احرف عربية فقط";
         isValid = false;
@@ -334,7 +340,7 @@ function validateFormstep2() {
       activityInput.classList.add('is-invalid');
       activityInputError.innerText = "هذا الحقل مطلوب";
         isValid = false;
-      } else if (!/^[؀-ۿ]+$/.test(activityInput.value)) { 
+      } else if (!/^[أ-ي]+$/.test(activityInput.value)) { 
         activityInput.classList.add('is-invalid');
         activityInputError.innerText = "يجب ان يحتوي على احرف عربية فقط";
         isValid = false;
@@ -408,7 +414,7 @@ function validateFormStep3() {
         regionInput.classList.add('is-invalid');
         regionError.innerText = "هذا الحقل مطلوب";
         isValid = false;
-      } else if (!/^[؀-ۿ]+$/.test(regionInput.value)) { 
+      } else if (!/^[أ-ي]+$/.test(regionInput.value)) { 
         regionInput.classList.add('is-invalid');
         regionError.innerText = "يجب ان يحتوي على احرف عربية فقط";
         isValid = false;
@@ -422,7 +428,7 @@ function validateFormStep3() {
         alamanaInput.classList.add('is-invalid');
         alamanaError.innerText = "هذا الحقل مطلوب";
         isValid = false;
-    } else if (!/^[؀-ۿ]+$/.test(alamanaInput.value)) { 
+    } else if (!/^[أ-ي]+$/.test(alamanaInput.value)) { 
       alamanaInput.classList.add('is-invalid');
       alamanaError.innerText = "يجب ان يحتوي على احرف عربية فقط";
       isValid = false;
@@ -436,7 +442,7 @@ function validateFormStep3() {
         municipalityInput.classList.add('is-invalid');
         municipalityError.innerText = "هذا الحقل مطلوب";
         isValid = false;
-      } else if (!/^[؀-ۿ]+$/.test(municipalityInput.value)) { 
+      } else if (!/^[أ-ي]+$/.test(municipalityInput.value)) { 
         municipalityInput.classList.add('is-invalid');
         municipalityError.innerText = "يجب ان يحتوي على احرف عربية فقط";
         isValid = false;
@@ -450,7 +456,7 @@ function validateFormStep3() {
         districtInput.classList.add('is-invalid');
         districtError.innerText = "هذا الحقل مطلوب";
         isValid = false;
-    } else if (!/^[؀-ۿ]+$/.test(districtInput.value)) { 
+    } else if (!/^[أ-ي]+$/.test(districtInput.value)) { 
         districtInput.classList.add('is-invalid');
         districtError.innerText = "يجب ان يحتوي على احرف عربية فقط";
         isValid = false;
@@ -464,7 +470,7 @@ function validateFormStep3() {
         streetInput.classList.add('is-invalid');
         streetError.innerText = "هذا الحقل مطلوب";
         isValid = false;
-      } else if (!/^[؀-ۿ]+$/.test(streetInput.value)) { 
+      } else if (!/^[أ-ي]+$/.test(streetInput.value)) { 
         streetInput.classList.add('is-invalid');
         streetError.innerText = "يجب ان يحتوي على احرف عربية فقط";
         isValid = false;
@@ -566,7 +572,7 @@ function validateFormStep4() {
     storeNameInput.classList.add('is-invalid');
     storeNameError.innerText = "هذا الحقل مطلوب";
     isValid = false;
-   } else if (!/^[؀-ۿ]+$/.test(storeNameInput.value)) {
+   } else if (!/^[أ-ي]+$/.test(storeNameInput.value)) {
     storeNameInput.classList.add('is-invalid');
     storeNameError.innerText = "يجب ان يحتوي على احرف عربية فقط";
     isValid = false;
@@ -660,7 +666,7 @@ function validateFormStep4() {
       boardTypeInput.classList.add('is-invalid');
       boardTypeError.innerText = "هذا الحقل مطلوب";
       isValid = false;
-  } else if (!/^[؀-ۿ]+$/.test(boardTypeInput.value)) { 
+  } else if (!/^[أ-ي]+$/.test(boardTypeInput.value)) { 
     boardTypeInput.classList.add('is-invalid');
     boardTypeError.innerText = "يجب ان يحتوي على احرف عربية فقط";
     isValid = false;
@@ -685,4 +691,3 @@ function validateFormStep4() {
 
   return isValid;
 }
-
