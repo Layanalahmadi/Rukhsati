@@ -29,6 +29,7 @@
                 </div>
                 
                 <form action="/login" method="POST">
+                  <div id="popupNotification" style="display: none; color: red;"></div>
                   <div class="form-group mb-3">
                     <input type="text" name="idNumber" placeholder="رقم الهوية / الإقامة"  autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4 text-right input-height">
                     <span class="text-danger" id="idError"></span>
@@ -78,7 +79,37 @@
                 });
                   
                 </script>
-                
+                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                 <script>
+                   $(document).ready(function () {
+                     // Function to display pop-up notification
+                     function showNotification(message) {
+                       $('#popupNotification').text(message);
+                       $('#popupNotification').fadeIn().delay(3000).fadeOut(); // Fade in, delay, and then fade out
+                     }
+ 
+                     // Handle AJAX responses
+                     $('form').submit(function (event) {
+                       event.preventDefault(); // Prevent form submission
+                       $.ajax({
+                         type: $(this).attr('method'),
+                         url: $(this).attr('action'),
+                         data: $(this).serialize(),
+                         success: function (response) {
+                           if (response.message) {
+                             showNotification(response.message); // Display message as pop-up notification
+                           } else {
+                             window.location.href = '/LandingPage.html'; // Redirect to landing page on successful login
+                           }
+                         },
+                         error: function (xhr, status, error) {
+                           var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : 'Internal Server Error';
+                           showNotification(errorMessage); // Display error message as pop-up notification
+                         }
+                       });
+                     });
+                   });
+                 </script>
 
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
