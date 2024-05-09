@@ -534,13 +534,15 @@ select{
 
 /* Buttons */
 .buttons {
-    position: relative; /* Remove absolute positioning */
-    display: flex; /* Remove fixed display */
-    justify-content: center; /* Adjust to center alignment */
+    position: relative; 
+    display: flex; 
+    justify-content: center;
     gap: 10rem;
+    display: flex;
+    justify-content: space-between;
   }
   
-  .buttons .next-step {
+.buttons .next-step {
     background-color: #3E8C74;
     color: #ffffff;
     display: block;
@@ -553,7 +555,20 @@ select{
     transition: .3s border-color;
   }
   
-  .buttons .go-back-button {
+.button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+.form-step {
+    display: flex;
+    flex-direction: column;
+  }
+  
+.buttons .submit-button {
+    margin-left: auto;
+}  
+.go-back-button {
     background-color: #ffffff;
     color: #3E8C74;
     display: block;
@@ -566,39 +581,56 @@ select{
     transition: .3s border-color;
   }
   
- form .submit-button {
-    background-color: #3E8C74;
-    color: #ffffff;
+.buttons .go-back-button:hover {
+    background-color: #f0f0f0;
+}
+.go-back-button1 {
+    background-color: #ffffff;
+    color: #3E8C74;
+    display: block;
     width: 15rem;
     margin: 10px 0;
     padding: 10px;
     cursor: pointer;
     border-radius: 10px;
-    border: 1px solid #eee;
+    border: 1px solid #3E8C74;
     transition: .3s border-color;
   }
-  .buttons .submit-button:hover {
-    background-color: #348267; 
-  }
-  .buttons .done-button {
-    background-color: #3E8C74;
-    color: #ffffff;
-    width: 15rem;
-    margin: 10px 0;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 10px;
-    border: 1px solid #eee;
-    transition: .3s border-color;
-  }
-  .buttons .done-button:hover {
-    background-color: #348267; 
-  }
-
   
-
-
-
+.buttons .go-back-button1:hover {
+    background-color: #f0f0f0;
+}
+.button-container .submit-button {
+    background-color: #3E8C74;
+    color: #ffffff;
+    width: 15rem;
+    margin: 10px 0;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    transition: .3s border-color;
+  }
+.button-container .submit-button:hover {
+    background-color: #348267; 
+  }
+.buttons .done-button {
+    background-color: #3E8C74;
+    color: #ffffff;
+    width: 15rem;
+    margin: 10px 0;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    transition: .3s border-color;
+    margin: 0 auto;
+    display: block;
+}
+.buttons .done-button:hover {
+    background-color: #348267; 
+}
+  
 /* Thank u page */
 .thank {
     text-align: center;
@@ -656,4 +688,5 @@ select{
     justify-content: center;
     align-items: center;
 }
+
 
