@@ -10,6 +10,9 @@ const nextButton = document.querySelector('.next-step');
 // Get the go back button
 const goBackButton = document.querySelector('.go-back-button');
 
+// Get the go back button
+const goBackButton1 = document.querySelector('.go-back-button1');
+
 // Get the submit button
 const submitButton = document.querySelector('.submit-button');
 
@@ -41,8 +44,10 @@ function showStep(stepIndex) {
   // Show or hide go back button based on the current step
   if (currentStep === 0) {
     goBackButton.style.display = 'none'; // Hide go back button on first step
+    goBackButton1.style.display = 'none';
   } else {
     goBackButton.style.display = 'block';
+    goBackButton1.style.display = 'block';
   }
    // Show or hide go back button based on the current step
    if (currentStep === 4) {
@@ -51,7 +56,8 @@ function showStep(stepIndex) {
     submitButton.style.display = 'none';
   }
   if (currentStep === 4) {
-    nextButton.style.display = 'none'; // Hide go back button on first step
+    nextButton.style.display = 'none'; 
+    goBackButton1.style.display = 'none'; 
   } else {
     nextButton.style.display = 'block';
   }
@@ -59,9 +65,10 @@ function showStep(stepIndex) {
     doneButton.style.display = 'block'; 
     nextButton.style.display = 'none';
     goBackButton.style.display = 'none';
+    goBackButton1.style.display = 'none';
   } else {
     doneButton.style.display = 'none';
-  }
+}
 
 }
 
@@ -96,7 +103,16 @@ goBackButton.addEventListener('click', () => {
   // Update step indicators
   updateStepIndicators();
 });
+// Function to handle go back button click
+goBackButton1.addEventListener('click', () => {
+  // Decrement current step by 1
+  currentStep--;
+  // Show the previous step
+  showStep(currentStep);
 
+  // Update step indicators
+  updateStepIndicators();
+});
 
 // Function to handle submit button click
 submitButton.addEventListener('click', () => {
